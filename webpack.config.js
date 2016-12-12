@@ -2,13 +2,21 @@
 var path = require('path'); //where to save file
 var webpack = require('webpack');
 
+var DEVELOPMENT = process.env.NODE_ENV === 'development';
+var PRODUCTION = process.env.NODE_ENV === 'production';
+
+var entry = PRODUCTION
+    ? ['./src/index.js']
+    : [
+    './src/index.js',
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080'
+];
+
+var plugins = PRODUCTION? [] : [ new webpack.HotModuleReplacementPlugin() ];
 module.exports = {
-    entry: [
-        './src/index.js',
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080'
-    ],
-    plugins: [ new webpack.HotModuleReplacementPlugin() ], //HotModuleReplacementPlugin is very big which means dev env only. no production
+    entry: entry,
+    plugins: plugins, //HotModuleReplacementPlugin is very big which means dev env only. no production
     output: {
         path: path.join(__dirname, 'dist'), //join with current directory, name dist
         publicPath: '/dist/', //public url of the output files in browser. if you have a script/link tag in header it's going to add '/dist/' before the file
