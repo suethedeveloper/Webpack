@@ -15,6 +15,7 @@ var entry = PRODUCTION
 
 var plugins = PRODUCTION? [] : [ new webpack.HotModuleReplacementPlugin() ];
 module.exports = {
+    devtool: 'source-map',
     entry: entry,
     plugins: plugins, //HotModuleReplacementPlugin is very big which means dev env only. no production
     module: {
@@ -22,7 +23,12 @@ module.exports = {
             test: /\.js$/,
             loaders:['babel-loader'],
             exclude: '/node_modules/'
-        }]
+        },
+            {
+                test: /\.(png|jpg|gif)$/,
+                loaders:['file-loader'],
+                exclude: '/node_modules/'
+            }]
     },
     output: {
         path: path.join(__dirname, 'dist'), //join with current directory, name dist
