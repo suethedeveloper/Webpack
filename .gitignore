@@ -1,0 +1,17 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+
+# OSX system files #
+.DS_Store
+
+
+# Package Files #
+*.war
+*.ear
+
+# IDEA config files #
+.idea/
+*.swp
