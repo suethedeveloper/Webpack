@@ -1,6 +1,8 @@
-var app = document.getElementById('app');
-var messages = require('./messages');
-app.innerHTML = "Hello with plugin<p>" + messages.hi + '<p> ' + messages.event + '!!!';
+const messages = require('./messages');
+const newMessage = ()=> (`<p>${messages.hi} ${messages.event}</p>`);
+
+const app = document.getElementById('app');
+app.innerHTML = newMessage();
 
 
 if (module.hot) {

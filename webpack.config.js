@@ -17,6 +17,13 @@ var plugins = PRODUCTION? [] : [ new webpack.HotModuleReplacementPlugin() ];
 module.exports = {
     entry: entry,
     plugins: plugins, //HotModuleReplacementPlugin is very big which means dev env only. no production
+    module: {
+        loaders: [{
+            test: /\.js$/,
+            loaders:['babel-loader'],
+            exclude: '/node_modules/'
+        }]
+    },
     output: {
         path: path.join(__dirname, 'dist'), //join with current directory, name dist
         publicPath: '/dist/', //public url of the output files in browser. if you have a script/link tag in header it's going to add '/dist/' before the file
